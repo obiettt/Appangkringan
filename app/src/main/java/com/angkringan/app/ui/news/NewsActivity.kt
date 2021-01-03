@@ -9,4 +9,7 @@ class NewsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news)
     }
+    companion object {
+        const val OPEN_NEWS = "OPEN_NEWS"
+    }
 }

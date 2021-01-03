@@ -22,10 +22,10 @@ abstract class BaseAdapter<T>(@field:LayoutRes private var layoutId: Int) :
      inner class  ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         private val  binding: ViewDataBinding? = DataBindingUtil.bind(itemView)
 
-         fun onBind(variable: Int?, data: List<T>?) : ViewDataBinding? {
-             return variable?.takeIf { data != null }?.let {
+         fun onBind(variable: Int?, articles: Any?) : ViewDataBinding? {
+             return variable?.takeIf { articles != null }?.let {
                  binding?.apply {
-                     setVariable(it, data)
+                     setVariable(it, articles)
                      executePendingBindings()
                  }
              }
@@ -47,15 +47,14 @@ abstract class BaseAdapter<T>(@field:LayoutRes private var layoutId: Int) :
     }
 
     abstract fun onBind(binding: ViewDataBinding?, data: T)
-
     abstract fun onClick(binding: ViewDataBinding?, data: T)
 
     override fun getItemCount(): Int {
         return listData?.size ?: 0
     }
 
-    override fun setData(data: List<T>?) {
-        listData = data
+    override fun setData(articles: List<T>?) {
+        listData = articles
         notifyDataSetChanged()
     }
 

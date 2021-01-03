@@ -1,9 +1,11 @@
 package com.angkringan.app.data.repository
 
 import com.angkringan.app.data.model.ActionState
+import com.angkringan.app.data.model.News
 import com.angkringan.app.data.remote.NewsService
 import com.angkringan.app.data.remote.RetrofitApi
 import retrofit2.await
+import java.lang.Exception
 import retrofit2.http.Query
 
 class NewsRepository {
@@ -28,7 +30,7 @@ class NewsRepository {
     suspend fun searchNews(query: String) : ActionState<List<News>> {
         return try {
             val list = newsService.searchNews(query).await()
-            ActionState(list.data.first())
+            ActionState(list.data)
         } catch (e: Exception) {
             ActionState(message = e.message, isSuccess = false)
         }
